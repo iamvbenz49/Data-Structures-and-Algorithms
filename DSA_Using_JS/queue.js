@@ -1,73 +1,58 @@
 class Queue {
     constructor() {
-            this.front = -1
-            this.back = -1
-            this.queue = []
-            for (let i = 0; i < 5; i++) {
-                this.queue.push(0)
-            }
-        }
-        //Checks if a queue is full
-    isFull() {
-            if (this.back === this.queue.length) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        //checks if an queue is empty
+        this.front = this.rear = -1
+        this.queue = [0, 0, 0, 0, 0]
+    }
     isEmpty() {
-        if (this.back === -1 && this.front === -1) {
-            return true;
+        if (this.front === -1 && this.rear === -1) {
+            return true
         } else {
-            return false;
+            return false
         }
     }
-    //adds element to the queue
+    isFull() {
+        if (this.front === 4) {
+            return true
+        } else {
+            return false
+        }
+    }
     enqueue(value) {
         if (this.isFull()) {
-            console.log("Queue over flow")
             return
         } else if (this.isEmpty()) {
-            this.front = this.back = 0
+            this.front = this.rear = 0
         } else {
-            this.front++
+            this.rear++;
         }
-        this.queue[this.front] = value
+        this.queue[this.rear] = value
     }
-    //removes element from the queue
     dequeue() {
-        var x = 0;
+        let key = 0;
         if (this.isEmpty()) {
-            console.log("Queue under flow")
             return
-        } else if (this.front == this.back) {
-            x = queue[this.back]
-            this.queue[this.front] = 0
-            this.front = this.back = -1
+        } else if (this.front === this.rear) {
+            key = this.queue[this.front]
+            this.queue[this.rear] = 0
+            this.front = this.rear = -1
         } else {
-            x = queue[this.back]
+            key = this.queue[this.front]
             this.queue[this.front] = 0
-            this.front++
+            console.log(this.front, "h")
+            this.front++;
         }
-        return x
-    }
-    count() {
-        console.log("the total number of elements is ", this.back - this.front + 1);
+        return key
     }
     display() {
-        for (let i = 0; i < 5; i++) {
-            console.log(this.queue[i])
-        }
+        return this.queue
     }
 }
 
 let queue = new Queue()
-
-queue.enqueue(5)
-queue.enqueue(6)
-queue.enqueue(092)
-queue.enqueue(21)
-queue.enqueue(23)
-queue.dequeue()
-queue.display()
+queue.enqueue(10)
+console.log(queue.dequeue())
+queue.enqueue(12)
+queue.enqueue(34)
+console.log(queue.dequeue())
+console.log(queue.dequeue())
+console.log(queue.display())
